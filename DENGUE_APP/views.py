@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect    
 from django.http import HttpResponse
-from DENGUE_APP.models import Medicine,Doctor,News
+from DENGUE_APP.models import Medicine,Doctor,News,Userdet
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
@@ -132,6 +132,10 @@ def saveuser(request):
         #create user
         myuser=User.objects.create_user(username,email,password)
         myuser.save()
+        
+        user=Userdet(username=username,mailid=email,password=password)
+        user.save()
+        
         messages.success(request,"your account is created")
         s_email="bj236051@gmail.com"
         r_email=email

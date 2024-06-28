@@ -26,6 +26,7 @@ class News(models.Model):
     news_link=models.CharField( max_length=500)
     news_des=models.CharField(max_length=2000)
     
-class userlog(models.Model):
+class Userdet(models.Model):
     username=models.CharField(max_length=500)
+    mailid=models.CharField(max_length=100)
     password=models.CharField(max_length=100)
