@@ -4,7 +4,7 @@ from DENGUE_APP.models import Medicine,Doctor,News,Userdet
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-import smtplib
+
 # Create your views here.
 
 def index(request):
@@ -115,47 +115,49 @@ def newslist(request):
 
 
 def saveuser(request):
-    if request.method =='POST':
-        username=request.POST.get('username')
-        email=request.POST.get('email')
-        password=request.POST.get('password')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
         
-        #check for errorneous inputs
-        if len(username) > 10:
-            messages.error(request,"username must be in 10 characters")
-            return redirect('index')
+       
+        # Check if the user already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+            return redirect('landing')
         
-        if not username.isalnum():
-            messages.error(request,"username should only contain letters or numbers")
-            return redirect('index')
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
+            return redirect('landing')
         
-        #create user
-        myuser=User.objects.create_user(username,email,password)
+        # # Create user
+        myuser = User.objects.create_user(username, email, password)
         myuser.save()
         
-        user=Userdet(username=username,mailid=email,password=password)
+        # Save user details (consider hashing the password)
+        user = Userdet(username=username, mailid=email, password=password)
         user.save()
-        
-        messages.success(request,"your account is created")
-        s_email="bj236051@gmail.com"
-        r_email=email
-        password="osfn caia qgdx ceaz"
-        messege = "Welcome to Dengue-Over and we will keep you updated with dengue fever"
-        server=smtplib.SMTP('smtp.gmail.com',587)
-        server.starttls()
-        server.login(s_email,password)
-        server.sendmail(s_email,r_email,messege)
         return redirect('index')
         
+        
     else:
-        return HttpResponse("error")
+        return HttpResponse("Error")
     
     
 def loginuser(request):  
  if request.method == 'POST':
     loguser=request.POST.get('logusername')
     logpass=request.POST.get('logpassword')
-    user=authenticate(request,username=loguser,password=logpass)
+    
+    # Check if the username exists
+    # if not User.objects.filter(username=loguser).exists():
+    #         messages.error(request, "This username is not registered.")
+    #         return render(request, 'landing.html', {
+    #             'logusername': loguser,
+    #             'logpassword': logpass,
+    #             'username_error': "This username is not registered."
+    #         }) 
+    user=authenticate(username=loguser,password=logpass)
     
     if user is not None: 
         login(request, user)
@@ -169,7 +171,8 @@ def logoutuser(request):
     # if request.method == 'POST':
     logout(request)
     messages.success(request,"You are logged out")
-    return redirect('index')
+    return redirect('landing')
     
-    
+def landing(request):
+    return render(request,"landing.html")
         

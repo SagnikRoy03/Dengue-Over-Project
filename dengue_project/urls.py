@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.urls import path
 from DENGUE_APP import views
 urlpatterns = [
-     path('', views.index,name="index"),
+     path('main/', views.index,name="index"),
      path('protect/', views.protect,name="protect"),
      path('doctors/', views.doctors,name="doctors"),
      path('news/', views.news,name="news"),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('signup/', views.saveuser,name="saveuser"),
     path('login/',views.loginuser,name="loginuser"),
     path('logout/',views.logoutuser,name="logoutuser"),
+    path('',views.landing,name="landing"),
     path('admin/', admin.site.urls)
     
    

@@ -30,6 +30,167 @@
        <link rel="stylesheet" href={% static "css/owl.carousel.min.css" %}>
        <link rel="stylesheet" href={% static "css/owl.theme.default.min.css" %}>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #e8eaef;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: top;
+}
+
+section {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  padding-block: min(20vh, 5rem);
+  text-align: center;
+  width: calc(min(90rem, 90%));
+  margin-inline: auto;
+}
+
+section p,
+section h2,
+section h3 {
+  letter-spacing: 0.035rem;
+}
+
+section p {
+  line-height: 1.7;
+  color: #454545;
+  max-width: 70rem;
+  margin: 0 auto;
+  font-size: clamp(0.9rem, 0.825rem + 0.3vw, 1.2rem);
+}
+
+section h2 {
+  font-size: clamp(3rem, 2.4286rem + 2.2857vw, 5rem);
+  color: #111;
+  text-transform: capitalize;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.cards {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: 2rem;
+}
+
+@media screen and (min-width: 51rem) {
+  .cards {
+    gap: 3.5rem;
+  }
+}
+
+.card {
+  position: relative;
+  text-align: left;
+  margin-top:20px;
+}
+.card:hover{
+   box-shadow: 0 0 15px rgba(0, 62, 245, 0.7);
+
+}
+
+.card .social-icon {
+  background: #111;
+  padding: 1rem 1.75rem;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+}
+
+.card .social-icon i {
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+{% comment %} .card .social-icon:hover i {
+  color: #003ef5;
+} {% endcomment %}
+
+.card img {
+  {% comment %} filter: grayscale(100%); {% endcomment %}
+  transition: 0.5s ease;
+}
+
+.card img:hover {
+  filter: grayscale(0%);
+}
+
+.card .card-content-wrapper {
+  margin-left: auto;
+  max-width: 90%;
+}
+
+.card .card-content-wrapper .card-content {
+  display: block;
+  background: white;
+  transition: 0.5s ease;
+  padding: 4.5rem 2rem 0 3.2rem;
+}
+
+.card .card-content-wrapper .card-content > div {
+  text-align: right;
+}
+
+.card .card-content-wrapper .card-content h3,
+.card .card-content-wrapper .card-content p {
+  text-transform: capitalize;
+}
+
+.card .card-content-wrapper .card-content h3 {
+  font-size: clamp(1.15rem, 1.1071rem + 0.1714vw, 1.3rem);
+  font-weight: 800;
+  color: #111;
+}
+
+.card .card-content-wrapper .card-content p {
+  color: #454545;
+  font-size: 0.9rem;
+}
+
+.card .card-content-wrapper .card-content svg {
+  display: inline-block;
+  text-align: right;
+  width: 60px;
+  color: #003ef5;
+}
+
+.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content,
+.card .card-content-wrapper:hover .card-content {
+  background: #003ef5;
+}
+
+.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content h3,
+.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content p,
+.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content svg,
+.card .card-content-wrapper:hover .card-content h3,
+.card .card-content-wrapper:hover .card-content p,
+.card .card-content-wrapper:hover .card-content svg {
+  color: #fff;
+}
+
+      </style>
    </head>
    <body>
       <!--header section start -->
@@ -57,124 +218,7 @@
                   <a class="nav-link" href="{% url 'news'%}">News</a>
                 </li>
               </ul>
-              {% if user.is_authenticated %}
-              <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Welcome {{request.user}}
-               </a>
-               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 <a class="dropdown-item" href="/logout">logout</a>
-               
-               </div>
-             </li>
-            {%else%}
-                <button type="submit" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal" id="bit1">
-                Log in
-               </button>
-          
-                <button type="submit" class="btn btn-success mr-2" data-toggle="modal" data-target="#signupModal">
-                 Sign up
-                </button>
-            
-            
-            {% endif %}
-            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-               <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                   <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                     </button>
-                   </div>
-                   <div class="modal-body">
-                     <form action="/login/" method="post">
-                     {%csrf_token%}
-                       <div class="form-group">
-                         <label for="exampleInputEmail1">User name</label>
-                         <input
-                           type="text"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                           aria-describedby="emailHelp"
-                           placeholder="Enter username"
-                           name="logusername"
-                         />
-                       </div>
-                      
-                       <div class="form-group">
-                         <label for="exampleInputPassword1">Password</label>
-                         <input
-                           type="password"
-                           class="form-control"
-                           id="exampleInputPassword1"
-                           placeholder="Password"
-                           name="logpassword"
-                         />
-                       </div>
-                       <button type="submit" class="btn btn-success">
-                        LOGIN
-                       </button>
-                     </form>
-                   </div>
-                  
-                 </div>
-               </div>
-             </div>
-                 
-               </div>
-             <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-               <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                   <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">SIGN UP</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                     </button>
-                   </div>
-                   <div class="modal-body">
-                     <form action="/signup/" method="post">
-                        {% csrf_token %}
-                       <div class="form-group">
-                         <label for="exampleInputEmail1">User name</label>
-                         <input
-                           type="text"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                           aria-describedby="emailHelp"
-                           placeholder="Enter username"
-                           name="username"
-                           required
-                         />
-                       </div>
-                        <div class="form-group">
-                         <label for="exampleInputEmail1">Email-id</label>
-                         <input
-                           type="email"
-                           class="form-control"
-                           id="exampleInputEmail1"
-                           aria-describedby="emailHelp"
-                           placeholder="Enter email"
-                           name="email"
-                           required
-                         />
-                       </div>
-                       <div class="form-group">
-                         <label for="exampleInputPassword1">Password</label>
-                         <input
-                           type="password"
-                           class="form-control"
-                           id="exampleInputPassword1"
-                           placeholder="Password"
-                           name="password"
-                           required
-                         />
-                       </div>
-                       <button type="submit" class="btn btn-success">
-                        Sign up
-                       </button>
-                     </form>
-                   </div>
+             
          </nav>
             <!-- banner section start -->
             <div class="container">
@@ -188,21 +232,31 @@
          <!-- banner section end -->
       </div>
       <!-- header section end -->
+      
       <!-- doctor section start -->
      
          <div class="container mt-4">
             <div class="row">
                 {% for d in doc_list %}
                 <div class="col-md-4">
-                      <div class="card" >
-                         <img class="card-img-top" src="{{ d.doctor_img.url }}" alt="Card image">
-                         <div class="container">
-                            <h4 class="card-title">{{ d.doctor_name }}</h4>
-                            <button type="button" class="btn btn-primary" id="det" data-toggle="modal" data-target=#myModal{{d.id}}>
-                              Details
-                             </button>
-                          </div>
-                       </div>
+                  <div class="card">
+                     <div class="card-img-wrapper">
+                       <img src="{{ d.doctor_img.url }}" alt="">
+                     </div>
+                     <a  data-toggle="modal" data-target=#myModal{{d.id}} class="social-icon"><img src="/static/images/external-link.png"></a>
+                     <div class="card-content-wrapper">
+                       <a href="#" class="card-content">
+                         <h3>{{ d.doctor_name }}</h3>
+                         <p>{{d.specialist}}</p>
+                         {% comment %} <div>
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                           </svg>
+                         </div> {% endcomment %}
+               
+                       </a>
+                     </div>
+                   </div>
                 </div>
               
     <div class="modal" id="myModal{{d.id}}">
