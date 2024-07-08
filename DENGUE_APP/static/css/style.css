@@ -219,15 +219,15 @@ button {
 .header_section {
   width: 100%;
   float: left;
-  background-image: url(../images/banner-bg.png);
   height: auto;
   height: auto;
   padding: 20px 0px;
   background-size: 100%;
 }
-
+#header_banner {
+  background-image: url(../images/banner.png);
+}
 .header_bg {
-  background-image: url(../images/header-bg.jpg);
   background-size: 100% 100%;
 }
 
