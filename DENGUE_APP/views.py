@@ -54,8 +54,11 @@ def savemedicine(request):
         medabout=request.POST.get('mfor')
         medcost=request.POST.get('mrs')
         medimg=request.FILES['mimg']
+        medlink1=request.POSt.get['mlink1']
+        medlink2=request.POSt.get['mlink2']
+        medlink3=request.POSt.get['mlink3']
         meddes=request.POST.get('mdes')
-        med_data=Medicine(medicine_name=medname,medcine_about=medabout,medicine_cost=medcost,medicine_img=medimg,medicine_des=meddes)
+        med_data=Medicine(medicine_name=medname,medcine_about=medabout,medicine_cost=medcost,medicine_img=medimg,medicine_des=meddes,link1=medlink1,link2=medlink2,link3=medlink3)
        
         med_data.save() 
         return redirect("/med_data")
@@ -149,23 +152,20 @@ def loginuser(request):
     loguser=request.POST.get('logusername')
     logpass=request.POST.get('logpassword')
     
-    # Check if the username exists
-    # if not User.objects.filter(username=loguser).exists():
-    #         messages.error(request, "This username is not registered.")
-    #         return render(request, 'landing.html', {
-    #             'logusername': loguser,
-    #             'logpassword': logpass,
-    #             'username_error': "This username is not registered."
-    #         }) 
     user=authenticate(username=loguser,password=logpass)
     
-    if user is not None: 
-        login(request, user)
-        messages.success(request,"You are logged in")
-        return redirect('index')
+    if user is not None:
+            print("User authenticated")
+            login(request, user)
+            messages.success(request, "You are logged in")
+            return redirect('index')
     else:
-        messages.error(request,"invalid username and password")
-    return HttpResponse('404-not found')
+            print("Authentication failed")
+            messages.error(request, "Invalid username or password")
+            return redirect('landing')
+ else:
+   return HttpResponse('404-not found')
+
 
 def logoutuser(request):
     # if request.method == 'POST':

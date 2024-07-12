@@ -221,8 +221,10 @@ button {
   float: left;
   height: auto;
   height: auto;
+  background-image: url(../images/medicine-bg.jpg);
   padding: 20px 0px;
   background-size: 100%;
+  margin-bottom: 20px;
 }
 #header_banner {
   background-image: url(../images/banner.png);

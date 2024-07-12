@@ -8,6 +8,9 @@ class Medicine(models.Model):
     medicine_cost=models.DecimalField(max_digits=5,decimal_places=2)
     medicine_img=models.ImageField(upload_to="medicine_img/")
     medicine_des=models.CharField(max_length=500)
+    link1=models.CharField(max_length=5000)
+    link2=models.CharField(max_length=5000)
+    link3=models.CharField(max_length=5000)
     
     
 class Doctor(models.Model):

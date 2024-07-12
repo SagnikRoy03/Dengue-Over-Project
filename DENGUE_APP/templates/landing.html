@@ -27,7 +27,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <header>
-            <h2><a href="#">DENGUE-OVER</a></h2>
+            <h2>DENGUE-OVER</h2>
            
           </header>
         
@@ -60,6 +60,7 @@
                                         aria-describedby="emailHelp"
                                         placeholder="Enter username"
                                         name="logemail"
+                                        required
                                     />
                                 </div>
                                 <div class="form-group">
@@ -70,9 +71,10 @@
                                         id="exampleInputPassword1"
                                         placeholder="Password"
                                         name="logpassword"
+                                        required
                                     />
                                 </div>
-                                <a type="submit" href="{% url 'index'%}" class="btn btn-success">LOGIN</a>
+                                <button type="submit" class="btn btn-success">LOGIN</button>
                             </form>
                         </div>
                     </div>
@@ -135,6 +137,26 @@
             </div>
           </section>
           <script>
+            function loginvalidity(){
+                let username=document.getElementById("exampleInputEmail1");
+                let password = document.getElementById("exampleInputPassword1");
+               
+                if (username.length < 4 || username.length > 10) {
+                    alert("Username must be between 4 and 10 characters.");
+                    valid = false;
+                }
+
+    
+                if (password.length < 6) {
+                    alert("Password must be at least 6 characters long.");
+                    valid = false;
+                }
+    
+                if (!valid) {
+                    event.preventDefault(); // Prevent form submission if validation fails
+                }
+
+            }
 
             function validation(){
             let username= document.getElementById("exampleInputUsername").value;

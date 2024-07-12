@@ -57,6 +57,9 @@
                   <th>What for</th>
                   <th>Cost</th>
                   <th>Medicine image</th>
+                  <th>Apollo 24</th>
+                  <th>Tata 1mg</th>
+                  <th>Flipkart Health Plus</th>
                   <th>Medicine description</th>
                   <th>Delete</th>
                 </tr>
@@ -77,6 +80,9 @@
                     <p>No image to dispaly</p>
                     {%endif%}
                   </td>
+                  <td>{{m.link1}}</td>
+                  <td>{{m.link2}}</td>
+                  <td>{{m.link3}}</td>
                   <td>{{m.medicine_des | safe}}</td>
                   <td>
                     <form action="{% url 'delmed' m.id %}" method="post">

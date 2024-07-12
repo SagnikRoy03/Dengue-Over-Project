@@ -29,172 +29,17 @@
        <!-- owl stylesheets --> 
        <link rel="stylesheet" href={% static "css/owl.carousel.min.css" %}>
        <link rel="stylesheet" href={% static "css/owl.theme.default.min.css" %}>
+       <link rel="stylesheet" href={% static "css/doctor.css" %}>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
       <style>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-  background: #e8eaef;
-  min-height: 100vh;
-}
-
-a {
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  object-position: top;
-}
-
-section {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  padding-block: min(20vh, 5rem);
-  text-align: center;
-  width: calc(min(90rem, 90%));
-  margin-inline: auto;
-}
-
-section p,
-section h2,
-section h3 {
-  letter-spacing: 0.035rem;
-}
-
-section p {
-  line-height: 1.7;
-  color: #454545;
-  max-width: 70rem;
-  margin: 0 auto;
-  font-size: clamp(0.9rem, 0.825rem + 0.3vw, 1.2rem);
-}
-
-section h2 {
-  font-size: clamp(3rem, 2.4286rem + 2.2857vw, 5rem);
-  color: #111;
-  text-transform: capitalize;
-  font-weight: 600;
-  line-height: 1;
-  margin-bottom: 1rem;
-}
-
-.cards {
-  margin-top: 4rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
-  gap: 2rem;
-}
-
-@media screen and (min-width: 51rem) {
-  .cards {
-    gap: 3.5rem;
-  }
-}
-
-.card {
-  position: relative;
-  text-align: left;
-  margin-top:20px;
-}
-.card:hover{
-   box-shadow: 0 0 15px rgba(0, 62, 245, 0.7);
-
-}
-
-.card .social-icon {
-  background: #111;
-  padding: 1rem 1.75rem;
-  display: inline-block;
-  position: absolute;
-  left: 0;
-}
-
-.card .social-icon i {
-  color: #fff;
-  font-size: 1.4rem;
-}
-
-{% comment %} .card .social-icon:hover i {
-  color: #003ef5;
-} {% endcomment %}
-
-.card img {
-  {% comment %} filter: grayscale(100%); {% endcomment %}
-  transition: 0.5s ease;
-}
-
-.card img:hover {
-  filter: grayscale(0%);
-}
-
-.card .card-content-wrapper {
-  margin-left: auto;
-  max-width: 90%;
-}
-
-.card .card-content-wrapper .card-content {
-  display: block;
-  background: white;
-  transition: 0.5s ease;
-  padding: 4.5rem 2rem 0 3.2rem;
-}
-
-.card .card-content-wrapper .card-content > div {
-  text-align: right;
-}
-
-.card .card-content-wrapper .card-content h3,
-.card .card-content-wrapper .card-content p {
-  text-transform: capitalize;
-}
-
-.card .card-content-wrapper .card-content h3 {
-  font-size: clamp(1.15rem, 1.1071rem + 0.1714vw, 1.3rem);
-  font-weight: 800;
-  color: #111;
-}
-
-.card .card-content-wrapper .card-content p {
-  color: #454545;
-  font-size: 0.9rem;
-}
-
-.card .card-content-wrapper .card-content svg {
-  display: inline-block;
-  text-align: right;
-  width: 60px;
-  color: #003ef5;
-}
-
-.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content,
-.card .card-content-wrapper:hover .card-content {
-  background: #003ef5;
-}
-
-.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content h3,
-.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content p,
-.card .card-img-wrapper:hover ~ .card-content-wrapper .card-content svg,
-.card .card-content-wrapper:hover .card-content h3,
-.card .card-content-wrapper:hover .card-content p,
-.card .card-content-wrapper:hover .card-content svg {
-  color: #fff;
-}
 
       </style>
    </head>
    <body>
       <!--header section start -->
-      <div class="header_section header_bg">
+      <div class="header_section" id="header_banner">
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">DENGUE-OVER</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -217,24 +62,46 @@ section h2 {
                <li class="nav-item">
                   <a class="nav-link" href="{% url 'news'%}">News</a>
                 </li>
+              
               </ul>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <img src="/static/images/user.png" width="20px" height="20px">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/logout">logout</a>
+                
+                </div>
+              </li>
              
          </nav>
             <!-- banner section start -->
             <div class="container">
-               <div class="about_taital_main">
-                  <h2 class="about_tag">DOCTORS</h2>
-                  <div class="about_menu">
-                     
-                  </div>
-               </div>
+                <div class="about_taital_main">
+                  <h2 class="about_tag">DOCTORS OPD</h2>
+                </div>
             </div>
          <!-- banner section end -->
-      </div>
+       </div>
+      <br><br>
       <!-- header section end -->
       
       <!-- doctor section start -->
-     
+      <div class="search-local justify-content-center">
+        <div class="icon">
+          <ion-icon name="location-outline"></ion-icon>
+        </div>
+      
+        <input type="text" placeholder="Search Location">
+        <button>
+          Search
+          <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        </button>
+      </div>
+      
+      <!-- icons -->
+    
+
          <div class="container mt-4">
             <div class="row">
                 {% for d in doc_list %}
@@ -340,5 +207,7 @@ section h2 {
          document.getElementById("myNav").style.width = "0%";
          }
       </script>  
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
    </body>
 </html>
