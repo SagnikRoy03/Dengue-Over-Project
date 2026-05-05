@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'DENGUE_APP'
+    'DENGUE_APP',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -68,10 +69,10 @@ TEMPLATES = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
 
 
 WSGI_APPLICATION = 'dengue_project.wsgi.application'

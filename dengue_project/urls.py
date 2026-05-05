@@ -4,6 +4,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from DENGUE_APP import views
+from django.urls import include
+from rest_framework import routers
+
+router= routers.DefaultRouter()
+router.register(r'doctor/loc',views.DoctorViewSet)
+
+
 urlpatterns = [
      path('main/', views.index,name="index"),
      path('protect/', views.protect,name="protect"),
@@ -29,7 +36,9 @@ urlpatterns = [
     path('login/',views.loginuser,name="loginuser"),
     path('logout/',views.logoutuser,name="logoutuser"),
     path('',views.landing,name="landing"),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('api-auth/',include('rest_framework.urls')),
+    path('',include(router.urls))
     
    
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

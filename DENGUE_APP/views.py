@@ -4,7 +4,8 @@ from DENGUE_APP.models import Medicine,Doctor,News,Userdet
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-
+from rest_framework import viewsets
+from DENGUE_APP.serializers import DoctorSerialize
 # Create your views here.
 
 def index(request):
@@ -73,6 +74,9 @@ def delmed(request,medicine_id):
     medicine.delete()
     return redirect('/med_data')
     
+class DoctorViewSet(viewsets.ModelViewSet):
+    queryset=Doctor.objects.all()
+    serializer_class=DoctorSerialize
     
 def savedoctor(request):
     if request.method == 'POST':
